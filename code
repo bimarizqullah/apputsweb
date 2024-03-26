@@ -1,0 +1,26 @@
+function addOrder() {
+    const foodSelect = document.getElementById('food');
+    const selectedOption = foodSelect.options[foodSelect.selectedIndex];
+    const foodName = selectedOption.textContent.split(' - ')[0];
+    const price = parseInt(selectedOption.getAttribute('data-price'));
+    const quantity = parseInt(document.getElementById('quantity').value); // Mengambil jumlah makanan yang dipilih
+
+    const ordersList = document.getElementById('orders');
+    const newOrder = document.createElement('li');
+    newOrder.textContent = `${foodName} x${quantity} - Rp ${price * quantity}`; // Menampilkan jumlah makanan dan total harga untuk makanan tersebut
+    ordersList.appendChild(newOrder);
+
+    let totalPrice = parseInt(document.getElementById('totalPrice').textContent);
+    totalPrice += price * quantity; // Menambahkan total harga untuk makanan tersebut
+    document.getElementById('totalPrice').textContent = totalPrice;
+
+}
+
+function resetOrder() {
+    const ordersList = document.getElementById('orders');
+    while (ordersList.firstChild) {
+        ordersList.removeChild(ordersList.firstChild);
+    }
+    total = 0;
+    document.getElementById('totalPrice').textContent = total;
+}
